@@ -1,15 +1,15 @@
-APLICATIVO NINJA
-===
+# APLICATIVO NINJA
 
 ![image alt text](imgs/image_0.jpg)
 
 Sistematização dos conteúdos criados na Oficina de Desing Thinking, realizada com Luis Felipe Coimbra, durante o Congresso Fora do Eixo & NINJA, de 21 a 24 de junho de 2018 em Santa Luzia (MG). A oficina foi realizada com 4 duplas/trios de trabalho, durante duas horas.
 
-Trio 1: Caio, Reni e Juliana
+## Trio 1: Caio, Reni e Juliana
+
 
 Inicie ganhando **empatia**.
 
-1. Entrevista 
+### 1. Entrevista 
 
 Reni
 
@@ -35,7 +35,7 @@ Caio
 
 * App colaborativo 
 
-2. Saiba mais
+### 2. Saiba mais
 
 * Uma busca que você possa montar e personalizar 
 
@@ -53,7 +53,7 @@ Caio
 
 Redefina o **problema**. 
 
-3. Capture descobertas 
+### 3. Capture descobertas 
 
 Necessidades 
 
@@ -69,19 +69,19 @@ Insights
 
 * Como desenvolver ideias 
 
-4. Defina o problema
+### 4. Defina o problema
 
 * Fazer a Mídia NINJA ser parte da vivência das pessoas 
 
 **Gere ideias**: gere alternativas para testar
 
-5. Descreva pelo menos 5 formas radicais de atender as necessidades
+### 5. Descreva pelo menos 5 formas radicais de atender as necessidades
 
 * Pirate Box: atualização do app mesmo em comunidades que não possuem internet
 
 Obtenha **feedback**
 
-6. Compartilhe as soluções e obtenha feedback
+### 6. Compartilhe as soluções e obtenha feedback
 
 * O app pode ser desenvolvido em contexto de baixo custo 
 
@@ -95,7 +95,7 @@ Obtenha **feedback**
 
 Interação baseada em **feedback**
 
-7. Reflita e proponha nova solução 
+### 7. Reflita e proponha nova solução 
 
 O que é esse app?
 
@@ -115,7 +115,7 @@ Problemas:
 
 Protocolo e **teste**
 
-8. Compartilhe sua solução e obtenha feedback
+### 8. Compartilhe sua solução e obtenha feedback
 
 O que funcionou: 
 
@@ -141,11 +141,11 @@ Ideias:
 
 ________________________________________________________________________________________________
 
-Dupla 1: Paulo e Duda
+## Dupla 1: Paulo e Duda
 
 Inicie ganhando **empatia**.
 
-1. Entrevista 
+### 1. Entrevista 
 
 * Facilidade em subir conteúdo diretamente 
 
@@ -163,7 +163,7 @@ Inicie ganhando **empatia**.
 
 * Financiamento: monetizar os conteúdos para gerar renda (youtube) 
 
-2. Saiba mais 
+### 2. Saiba mais 
 
 * Galeria de imagens , banco de imagens colaborativo - subir conteúdo em tempo real 
 
@@ -181,7 +181,7 @@ Inicie ganhando **empatia**.
 
 * Um feed multiplataformas que mostre o que os NINJAs estão subindo nas diferentes plataformas
 
-3. Capture descobertas 
+### 3. Capture descobertas 
 
 Necessidades 
 
@@ -209,13 +209,13 @@ Insights
 
 * Não foi respondido
 
-4. Defina o problema
+### 4. Defina o problema
 
 * Não foi respondido
 
 **Gere ideias**: gere alternativas para testar
 
-5. Descreva pelo menos 5 formas radicais de atender as necessidades
+### 5. Descreva pelo menos 5 formas radicais de atender as necessidades
 
 * Campanha de divulgação reunindo os NINJAs dos territórios para para preencher uma primeira roda de mapa 
 
@@ -229,7 +229,7 @@ Insights
 
 Obtenha **feedback**
 
-6. Compartilhe as soluções e obtenha feedback
+### 6. Compartilhe as soluções e obtenha feedback
 
 * Cool 
 
@@ -255,7 +255,7 @@ Obtenha **feedback**
 
 Interação baseada em **feedback**
 
-7. Reflita e proponha nova solução 
+### 7. Reflita e proponha nova solução 
 
 * Login simples e multiplataformas 
 
@@ -275,17 +275,17 @@ Interação baseada em **feedback**
 
 Protocolo e **teste**
 
-8. Compartilhe sua solução e obtenha feedback
+### 8. Compartilhe sua solução e obtenha feedback
 
 * não foi respondido 
 
 ________________________________________________________________________________________________
 
-Trio 2: Raissa, Karyni e Leandrinha
+## Trio 2: Raissa, Karyni e Leandrinha
 
 Inicie ganhando **empatia**.
 
-1. Entrevista 
+### 1. Entrevista 
 
 Raíssa
 
@@ -323,7 +323,7 @@ Leandrinha
 
 * Aplicativo clean 
 
-2. Saiba mais 
+### 2. Saiba mais 
 
 * Divisão por áreas - interface do usuário 
 
@@ -337,7 +337,7 @@ Leandrinha
 
 * Acessibilidade: ser um app mutável o tempo todo 
 
-3. Capture descobertas 
+### 3. Capture descobertas 
 
 Necessidades 
 
@@ -357,7 +357,7 @@ Insights
 
 * Possibilidade de financiamento de projetos individuais. Alguém abre a demanda e as pessoas podem doar distribuido. 
 
-4. Defina o problema
+### 4. Defina o problema
 
 Nome do Parceiro/ descrição precisa de uma forma de… 
 
@@ -377,7 +377,7 @@ Nome do Parceiro/ descrição precisa de uma forma de…
 
 **Gere ideias**: gere alternativas para testar
 
-5. Descreva pelo menos 5 formas radicais de atender as necessidades
+### 5. Descreva pelo menos 5 formas radicais de atender as necessidades
 
 * Comunidade ativa: sou ninja!
 
@@ -391,7 +391,7 @@ Nome do Parceiro/ descrição precisa de uma forma de…
 
 Obtenha **feedback**
 
-6. Compartilhe as soluções e obtenha feedback
+### 6. Compartilhe as soluções e obtenha feedback
 
 * Mais gente! Para solucionar moderação e produção 
 
@@ -407,13 +407,13 @@ Obtenha **feedback**
 
 Interação baseada em **feedback**
 
-7. Reflita e proponha nova solução 
+### 7. Reflita e proponha nova solução 
 
 * não foi respondido
 
 Protocolo e **teste**
 
-8. Compartilhe sua solução e obtenha feedback
+### 8. Compartilhe sua solução e obtenha feedback
 
 O que funcionou: 
 
@@ -441,11 +441,11 @@ O que podia ser melhor:
 
 ________________________________________________________________________________________________
 
-Trio 4: Targino e Lucas
+## Trio 4: Targino e Lucas
 
 Inicie ganhando **empatia**.
 
-1. Entrevista 
+### 1. Entrevista 
 
 * Um feed que sistematiza e organiza  que esta na Time Line das principais redes, que mapeia a diversidade dos coletivos no território. Ex.: deu um match com a xepa, local, o ativismo, canábico, LGBT, etc..
 
@@ -453,11 +453,11 @@ Inicie ganhando **empatia**.
 
 * Espaço para descobrir e conectar NINJAs próximos 
 
-2. Saiba mais 
+### 2. Saiba mais 
 
 * Tudo para a gente como a gente num só lugar: bonde uber do B, hospeda - airbnb etc, scruff, grindr, hornet, troca de serviços
 
-3. Capture descobertas 
+### 3. Capture descobertas 
 
 Necessidades
 
@@ -473,7 +473,7 @@ Insights
 
 * não foi respondido
 
-4. Defina o problema
+### 4. Defina o problema
 
 * Só solução: solucionáticos! Conectar soluções
 
@@ -489,7 +489,7 @@ Pq/Mas…
 
 **Gere ideias**: gere alternativas para testar
 
-5. Descreva pelo menos 5 formas radicais de atender as necessidades
+### 5. Descreva pelo menos 5 formas radicais de atender as necessidades
 
 Definição do problema: 
 
@@ -507,7 +507,7 @@ Definição do problema:
 
 Obtenha **feedback**
 
-6. Compartilhe as soluções e obtenha feedback
+### 6. Compartilhe as soluções e obtenha feedback
 
 * Torne sua vida melhor
 
@@ -517,13 +517,13 @@ Obtenha **feedback**
 
 Interação baseada em **feedback**
 
-7. Reflita e proponha nova solução 
+### 7. Reflita e proponha nova solução 
 
 * não foi respondido
 
 Protocolo e **teste**
 
-8. Compartilhe sua solução e obtenha feedback
+### 8. Compartilhe sua solução e obtenha feedback
 
 O que funcionou
 
