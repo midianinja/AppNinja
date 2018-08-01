@@ -1,5 +1,8 @@
 # APLICATIVO NINJA
 
+![GitHub](https://img.shields.io/github/license/ForaDoEixo/AppNinja.svg)
+[![chatroom icon](https://patrolavia.github.io/telegram-badge/chat.png)](https://t.me/joinchat/AEg1X1NZqgligtfGV7x3Og)
+
 ![image alt text](imgs/image_0.jpg)
 
 Sistematização dos conteúdos criados na Oficina de Desing Thinking, realizada com Luis Felipe Coimbra, durante o Congresso Fora do Eixo & NINJA, de 21 a 24 de junho de 2018 em Santa Luzia (MG). A oficina foi realizada com 4 duplas/trios de trabalho, durante duas horas.
@@ -113,7 +116,8 @@ Problemas:
 
 * Ambiente off line 
 
-Protocolo e **teste**
+
+Protocolo e **teste**
 
 ### 8. Compartilhe sua solução e obtenha feedback
 
@@ -367,7 +371,8 @@ Nome do Parceiro/ descrição precisa de uma forma de…
 
 * Karyni: uma forma de conectar mais midiativistas
 
-Pq / mas… 
+
+Pq / mas… 
 
 * Leandrinha: novas possibilidades 
 
