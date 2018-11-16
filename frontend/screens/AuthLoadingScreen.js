@@ -6,6 +6,7 @@ import {
   StyleSheet,
   View,
   Text,
+  Image,
 } from 'react-native';
 
 export default class AuthLoadingScreen extends React.Component {
@@ -16,19 +17,19 @@ export default class AuthLoadingScreen extends React.Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
+    const splashScreenDelay = 2000;
     const userToken = await AsyncStorage.getItem('userToken');
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+    setTimeout(() => this.props.navigation.navigate(userToken ? 'App' : 'Auth'), splashScreenDelay);
   };
 
   // Render any loading content that you like here
   render() {
     return (
       <View style={styles.container}>
-        <ActivityIndicator />
-        <StatusBar barStyle="default" />
+        <Image style={styles.splashScreen} source={require('../assets/images/splash.png')} />
       </View>
     );
   }
@@ -37,6 +38,10 @@ export default class AuthLoadingScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#fff',
+  },
+  splashScreen: {
+    height: '100%',
+    width: '100%',
   },
 });

@@ -5,38 +5,14 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
+  TouchableOpacity,
+  Button,
+  AsyncStorage,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
-
-/**
-class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Welcome to the app!',
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Button title="Show me more of the app" onPress={this._showMoreApp} />
-        <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
-      </View>
-    );
-  }
-
-  _showMoreApp = () => {
-    this.props.navigation.navigate('Other');
-  };
-
-  _signOutAsync = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
-  };
-}
-*/
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -66,10 +42,8 @@ export default class HomeScreen extends React.Component {
             <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
               <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
             </View>
+            <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
 
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
           </View>
 
           <View style={styles.helpContainer}>
@@ -113,14 +87,13 @@ export default class HomeScreen extends React.Component {
     }
   }
 
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
   };
 
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
+  _handleLearnMorePress = () => {
+    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
   };
 }
 
