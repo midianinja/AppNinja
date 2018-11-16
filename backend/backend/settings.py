@@ -39,10 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+	'allauth',
+	'allauth.account',
+	'allauth.socialaccount',
+	'allauth.socialaccount.providers.facebook',
     'account',
     'corsheaders',
     'rest_framework.authtoken',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -68,10 +74,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-            ],
+            	],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = {
+	'django.contrib.auth.backends.ModelBackend',
+	'allauth.account.auth_backends.AuthenticationBackEnd',
+}
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
