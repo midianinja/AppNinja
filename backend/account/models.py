@@ -40,4 +40,40 @@ class User(AbstractUser):
 
     objects = UserManager()
 
+    GENDER_CHOICES = (
+        (0, 'Masculino'),
+        (1, 'Feminino'),
+        (2, 'Prefiro não declarar'),
+    )
+    gender = models.IntegerField(choices=GENDER_CHOICES, null=True)
+
+    ORIENT_SEX_CHOICES = (
+        (0, 'Heterossexual'),
+        (1, 'Homossexual'),
+        (2, 'Bissexual'),
+        (3, 'Pansexual'),
+        (4, 'Assexual'),
+        (5, 'Fluido'),
+        (6, 'Prefiro não declarar')
+    )
+    orient_sex = models.IntegerField(choices=ORIENT_SEX_CHOICES, null=True)
+
+    ID_GEN_CHOICES = (
+        (0, 'Cisgênero'),
+        (1, 'Transgênero'),
+        (2, 'Neutro ou Não-binario'),
+        (3, 'Prefiro não declarar')
+    )
+    ident_genero = models.IntegerField(choices=ID_GEN_CHOICES, null=True)
+
+    ETNIA_CHOICES = (
+        (0, 'Negra'),
+        (1, 'Indígena'),
+        (2, 'Asiática'),
+        (3, 'Caucasiana'),
+        (4, 'Mestiça'),
+        (5, 'Outra')
+    )
+    etnia = models.IntegerField(choices=ETNIA_CHOICES, null=True)
+
 # Create your models here.
