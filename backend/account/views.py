@@ -22,6 +22,7 @@ class UserList(APIView):
     List all users or create a new one
     """
     permission_classes = [AllowAny]
+    # permission_classes = [permissions.DjangoModelPermissions]
 
     def get(self, request, format=None):
         users = User.objects
@@ -106,8 +107,8 @@ class UserMe(UserDetail):
         return super().delete(request, request.user.id, format)
 
 class AuthLogin(BaseAPIView):
-    permission_classes = [AllowAny]
 
+    permission_classes = [AllowAny]
     def post(self, request, format=None):
         for field in ('email', 'password'):
             if not request.data.get(field):
@@ -120,6 +121,7 @@ class AuthLogin(BaseAPIView):
             return Response(status=status.HTTP_401_UNAUTHORIZED)
         (token, created) = Token.objects.get_or_create(user=user)
         return Response({ 'data': {'token': token.key }})
+
 
 class AuthLogout(BaseAPIView):
     permission_classes = [IsAuthenticated]

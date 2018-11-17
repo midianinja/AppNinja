@@ -17,4 +17,3 @@ if response.status_code == 200:
         print("Logout realizado com sucesso")
 else:
     print("Erro no login")
-
