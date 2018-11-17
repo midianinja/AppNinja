@@ -41,6 +41,65 @@ class User(AbstractUser):
 
     objects = UserManager()
 
+
+# Create your models here.
+
+
+class Habilidade(models.Model):
+
+    descricao = models.CharField(unique=True, max_length=500)
+
+    def __str__(self):
+        return self.descricao
+
+class Interesse(models.Model):
+
+    descricao = models.CharField(unique=True, max_length=500)
+
+    def __str__(self):
+        return self.descricao
+
+class Causa(models.Model):
+
+    descricao = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.descricao
+
+class Pais(models.Model):
+
+    nome = models.CharField(unique=True, max_length=500)
+
+class Estado(models.Model):
+
+    nome = models.CharField(unique=True, max_length=500)
+    sigla_uf = models.CharField(unique=True, null=True, max_length=500)
+    pais = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True)
+
+class Cidade(models.Model):
+
+    nome = models.CharField(unique=True, max_length=500)
+    estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True)
+
+class PerfilNinja(models.Model):
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    interesses = models.ManyToManyField(Interesse)
+    causas = models.ManyToManyField(Causa)
+    habilidades = models.ManyToManyField(Habilidade)
+
+    cidade = models.ForeignKey(Cidade, on_delete=models.SET_NULL, null=True)
+
+    telefone = models.CharField(max_length=500)
+    dt_nasc = models.DateField()
+    twitter = models.CharField(max_length=500)
+    facebook = models.CharField(max_length=500)
+    instagram = models.CharField(max_length=500)
+    telegram = models.CharField(max_length=500)
+    profissao = models.CharField(max_length=500)
+    bio = models.TextField('bio', max_length=500)
+
     GENDER_CHOICES = (
         (0, 'Masculino'),
         (1, 'Feminino'),
@@ -76,5 +135,3 @@ class User(AbstractUser):
         (5, 'Outra')
     )
     etnia = models.IntegerField(choices=ETNIA_CHOICES, null=True)
-
-# Create your models here.

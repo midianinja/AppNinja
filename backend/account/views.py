@@ -72,7 +72,7 @@ class UserList(APIView):
 
     def email_verification(request, user_id, token):
         user = User.objects.get(id=user_id)
-        if token == Token.objects.get(user=user).key:
+        if user.is_active == False and token == Token.objects.get(user=user).key:
             user.is_active = True
             user.save()
 
