@@ -65,7 +65,7 @@ export default class SignInScreen extends React.Component {
   _signInAsync = async () => {
     this.setState({isLoading: true});
 
-    fetch(process.env.API_URL + 'auth/', {
+    fetch(process.env.API_URL + 'api/auth/login/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -78,7 +78,8 @@ export default class SignInScreen extends React.Component {
     }).then((response) => {
       this.setState({isLoading: false});
       let data = response.json();
-      await AsyncStorage.setItem('userToken', data.token);
+      await AsyncStorage.setItem('userToken', data.data.token);
+      console.log('token:', data.data.token);
       this.props.navigation.navigate('App');
     }).catch((error) => {
       this.setState({isLoading: false});
