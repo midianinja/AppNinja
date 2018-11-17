@@ -3,6 +3,7 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { ThemeProvider } from 'react-native-elements';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+import FlashMessage from 'react-native-flash-message';
 import Theme from './constants/Theme.js';
 
 export default class App extends React.Component {
@@ -24,6 +25,7 @@ export default class App extends React.Component {
         <ThemeProvider theme={Theme}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           <AppNavigator />
+          <FlashMessage position='top' />
         </ThemeProvider>
       );
     }

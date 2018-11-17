@@ -68,7 +68,7 @@ export default class SignInScreen extends React.Component {
   };
 
   _signUpScreen = () => {
-    this.props.navigation.navigate();
+    this.props.navigation.navigate('SignUp');
   };
 
   _signInWithFacebook = () => {
