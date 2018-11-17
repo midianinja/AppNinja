@@ -40,7 +40,7 @@ export default class SignInScreen extends React.Component {
             <Icon name='lock' color='white' />
           } />
           <Button title='LOGIN' onPress={this._signInAsync} />
-          <Button {...theme.passwordRecovery} title='Esqueci a senha' onPress={this._passwordRecoveryScreen} />
+          <Button {...theme.passwordRecovery} title='Esqueci a senha' onPress={this._passwordResetScreen} />
         </View>
         <View style={[theme.fullContainer, {paddingTop: 20}]}>
           <Text>_____________     Ou acesse com     _____________</Text>
@@ -63,8 +63,8 @@ export default class SignInScreen extends React.Component {
     this.props.navigation.navigate('App');
   };
 
-  _passwordRecoveryScreen = () => {
-    this.props.navigation.navigate();
+  _passwordResetScreen = () => {
+    this.props.navigation.navigate('PasswordReset');
   };
 
   _signUpScreen = () => {

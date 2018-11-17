@@ -68,7 +68,7 @@ export default class SignUpScreen extends React.Component {
     }
     this.setState({ isLoading: true });
 
-    fetch('server_address_here', {
+    fetch(process.env.API_URL + 'account/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
