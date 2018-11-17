@@ -1,7 +1,9 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { ThemeProvider } from 'react-native-elements';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+import Theme from './constants/Theme.js';
 
 export default class App extends React.Component {
   state = {
@@ -19,10 +21,10 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
+        <ThemeProvider theme={Theme}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           <AppNavigator />
-        </View>
+        </ThemeProvider>
       );
     }
   }
@@ -53,10 +55,3 @@ export default class App extends React.Component {
     this.setState({ isLoadingComplete: true });
   };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
