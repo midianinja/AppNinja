@@ -6,6 +6,7 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, data):
         if data.get('password'):
             data['password'] = make_password(data['password'])
+            data['is_active'] = False
         return super().create(data)
 
     class Meta:

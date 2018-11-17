@@ -4,6 +4,7 @@ from .views import UserList, UserDetail, UserMe, AuthLogin
 
 urlpatterns = [
     url(r'^users/?$', UserList.as_view()),
+    url(r'^users/confirm/(?P<user_id>.*)/(?P<token>.*)$', UserList.email_verification),
     url(r'^users/me/?$', UserMe.as_view()),
     url(r'^users/(?P<pk>[0-9]+)/?$', UserDetail.as_view()),
 ]

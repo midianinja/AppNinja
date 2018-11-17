@@ -11,6 +11,7 @@ from django.contrib.auth.models import Permission
 from django.conf import settings
 from .models import User
 from .serializers import UserSerializer
+from django.core.mail import send_mail
 
 class APIView(BaseAPIView):
     def has_perm_on_object(self, user, obj, perm):
@@ -22,7 +23,6 @@ class UserList(APIView):
     List all users or create a new one
     """
     permission_classes = [AllowAny]
-    # permission_classes = [permissions.DjangoModelPermissions]
 
     def get(self, request, format=None):
         users = User.objects
@@ -36,6 +36,7 @@ class UserList(APIView):
                 Permission.objects.get(group__user=request.user, codename='change_user')
         except Permission.DoesNotExist:
             users = users.filter(id=request.user.id)
+            users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
 
@@ -48,8 +49,41 @@ class UserList(APIView):
         serializer = UserSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            user = User.objects.get(email=data['email'])
+            if self.envia_email_confirmacao(user):
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def envia_email_confirmacao(self, user):
+
+        link = 'http://127.0.0.1:8000/api/account/users/confirm/{ID}/{TOKEN}'
+        link = link.format(TOKEN=Token.objects.get_or_create(user=user)[0].pk, ID=user.id)
+
+        msg = 'Clique em {LINK} para confirmar seu email'.format(LINK=link)
+
+        return send_mail(
+            'Confirmação de email',
+            msg,
+            'appninjamailer@gmail.com',
+            [user.email],
+            fail_silently=False,
+        )
+
+    def email_verification(request, user_id, token):
+        user = User.objects.get(id=user_id)
+        if token == Token.objects.get(user=user).key:
+            user.is_active = True
+            user.save()
+
+            send_mail(
+                'Confirmação de email',
+                'Seu email {EMAIL} foi verificado com sucesso'.format(EMAIL=user.email),
+                'appninjamailer@gmail.com',
+                [user.email],
+                fail_silently=False,
+            )
+
 
 class UserDetail(APIView):
     """
