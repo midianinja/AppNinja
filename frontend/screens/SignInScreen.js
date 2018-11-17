@@ -5,13 +5,16 @@ import {
   Icon,
   Text,
   Divider,
+  Overlay,
 } from 'react-native-elements';
 import {
   View,
   StyleSheet,
   Image,
   AsyncStorage,
+  ActivityIndicator,
 } from 'react-native';
+import { showMessage } from 'react-native-flash-message';
 import theme from '../constants/Theme';
 
 export default class SignInScreen extends React.Component {
@@ -25,6 +28,7 @@ export default class SignInScreen extends React.Component {
     this.state = {
       email: '',
       password: '',
+      isLoading: false,
     };
   }
 
@@ -35,12 +39,12 @@ export default class SignInScreen extends React.Component {
         <View style={[theme.fullContainer, {flex: 6, paddingVertical: 20}]}>
           <Input placeholder='Usuário' leftIcon={
             <Icon name='user' color='white' />
-          } />
+          } onChangeText={(email) => this.setState({email})} />
           <Input containerStyle={{marginTop: 5}} secureTextEntry placeholder='Senha' leftIcon={
             <Icon name='lock' color='white' />
-          } />
+          } onChangeText={(password) => this.setState({password})} />
           <Button title='LOGIN' onPress={this._signInAsync} />
-          <Button {...theme.passwordRecovery} title='Esqueci a senha' onPress={this._passwordRecoveryScreen} />
+          <Button {...theme.passwordRecovery} title='Esqueci a senha' onPress={this._passwordResetScreen} />
         </View>
         <View style={[theme.fullContainer, {paddingTop: 20}]}>
           <Text>_____________     Ou acesse com     _____________</Text>
@@ -54,21 +58,55 @@ export default class SignInScreen extends React.Component {
           <Text>Não tem uma conta?</Text>
           <Button title='CRIAR UMA CONTA' {...theme.buttonSecondary} onPress={this._signUpScreen} />
         </View>
+        <Overlay isVisible={this.state.isLoading}>
+          <ActivityIndicator size='large' color='white'/>
+        </Overlay>
       </View>
     );
   }
 
   _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('App');
+    this.setState({isLoading: true});
+
+    let response = await fetch(process.env.API_URL + 'api/auth/login/', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+      }),
+    });
+
+    this.setState({isLoading: false});
+
+    if (!response) {
+      showMessage({
+        message: 'Erro',
+        description: 'Ocorreu um erro de comunicação com o servidor',
+        type: 'danger',
+      });
+    } else if (!response.ok && response.status === 401) {
+      showMessage({
+        message: 'Erro',
+        description: 'Usuário ou senha inválidos',
+        type: 'danger',
+      });
+    } else {
+      let data = await response.json();
+      await AsyncStorage.setItem('userToken', data.data.token);
+      this.props.navigation.navigate('App');
+    }
   };
 
-  _passwordRecoveryScreen = () => {
-    this.props.navigation.navigate();
+  _passwordResetScreen = () => {
+    this.props.navigation.navigate('PasswordReset');
   };
 
   _signUpScreen = () => {
-    this.props.navigation.navigate();
+    this.props.navigation.navigate('SignUp');
   };
 
   _signInWithFacebook = () => {

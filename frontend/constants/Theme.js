@@ -1,9 +1,12 @@
+import { Platform } from 'react-native';
+
 export default {
   colors: {
     primary: '#020500',
     secondary: '#a81e1c', 
   },
   Input: {
+    autoCorrect: false,
     containerStyle: {
       backgroundColor: '#22241f',
     },
@@ -32,6 +35,22 @@ export default {
     style: {
       color: '#ffffff',
       fontSize: 14,
+    },
+  },
+  Overlay: {
+    windowBackgroundColor: 'rgba(0, 0, 0, .5)',
+    overlayBackgroundColor: 'rgba(0, 0, 0, 0)',
+    overlayStyle: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      ...Platform.select({
+        android: {
+          elevation: 0,
+        },
+        ios: {
+          shadowColor: 'rgba(0, 0, 0, 0)',
+        },
+      }),
     },
   },
   container: {
