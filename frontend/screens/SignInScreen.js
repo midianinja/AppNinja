@@ -5,13 +5,16 @@ import {
   Icon,
   Text,
   Divider,
+  Overlay,
 } from 'react-native-elements';
 import {
   View,
   StyleSheet,
   Image,
   AsyncStorage,
+  ActivityIndicator,
 } from 'react-native';
+import { showMessage } from 'react-native-flash-message';
 import theme from '../constants/Theme';
 
 export default class SignInScreen extends React.Component {
@@ -65,7 +68,7 @@ export default class SignInScreen extends React.Component {
   _signInAsync = async () => {
     this.setState({isLoading: true});
 
-    fetch(process.env.API_URL + 'api/auth/login/', {
+    let response = await fetch(process.env.API_URL + 'api/auth/login/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -75,22 +78,27 @@ export default class SignInScreen extends React.Component {
         email: this.state.email,
         password: this.state.password,
       }),
-    }).then((response) => {
-      this.setState({isLoading: false});
-      let data = response.json();
-      await AsyncStorage.setItem('userToken', data.data.token);
-      console.log('token:', data.data.token);
-      this.props.navigation.navigate('App');
-    }).catch((error) => {
-      this.setState({isLoading: false});
-      let data = error.json();
-      this.setState({ isLoading: false });
+    });
+
+    this.setState({isLoading: false});
+
+    if (!response) {
       showMessage({
         message: 'Erro',
-        description: data.message,
+        description: 'Ocorreu um erro de comunicação com o servidor',
         type: 'danger',
       });
-    });
+    } else if (!response.ok && response.status === 401) {
+      showMessage({
+        message: 'Erro',
+        description: 'Usuário ou senha inválidos',
+        type: 'danger',
+      });
+    } else {
+      let data = await response.json();
+      await AsyncStorage.setItem('userToken', data.data.token);
+      this.props.navigation.navigate('App');
+    }
   };
 
   _passwordResetScreen = () => {
