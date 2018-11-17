@@ -113,7 +113,8 @@ Problemas:
 
 * Ambiente off line 
 
-Protocolo e **teste**
+
+Protocolo e **teste**
 
 ### 8. Compartilhe sua solução e obtenha feedback
 
@@ -367,7 +368,8 @@ Nome do Parceiro/ descrição precisa de uma forma de…
 
 * Karyni: uma forma de conectar mais midiativistas
 
-Pq / mas… 
+
+Pq / mas… 
 
 * Leandrinha: novas possibilidades 
 
