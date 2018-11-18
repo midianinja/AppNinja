@@ -136,21 +136,37 @@ export default class AccountScreen extends React.Component {
     let userToken = await AsyncStorage.getItem('userToken');
     await AsyncStorage.setItem('user', dataString);
 
-    let response = await fetch(process.env.API_URL + 'api/account/', {
+    let response = await fetch(process.env.API_URL + 'api/account/cadastro/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Token: userToken,
+        Authorization: 'Token ' + userToken,
       },
       body: dataString,
     });
 
-    //let parsedResponse = await response.json();
-
-    // check success
-
     this.setState({isLoading: false});
+
+    if (!response) {
+      showMessage({
+        message: 'Erro',
+        description: 'Ocorreu um erro de comunicação com o servidor',
+        type: 'danger',
+      });
+    } else if (!response.ok) {
+      showMessage({
+        message: 'Erro',
+        description: 'Ocorreu um erro ao salvar os seus dados :(',
+        type: 'danger',
+      });
+    } else {
+      showMessage({
+        message: 'Sucesso!',
+        description: 'Seus dados foram salvos :D',
+        type: 'success',
+      });
+    }
   };
 
   _loadInformation = async () => {
@@ -159,6 +175,27 @@ export default class AccountScreen extends React.Component {
     if (userDataString) {
       let userData = JSON.parse(userDataString);
       this.setState(userData);
+      return;
+    }
+
+    let response = await fetch(process.env.API_URL + 'api/account/', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Token ' + userToken,
+      },
+    });
+
+    if (response) {
+      let data = await response.json();
+      this.setState(data.data);
+    } else {
+      showMessage({
+        message: 'Erro',
+        description: 'Ocorreu um erro ao obter os seus dados :(',
+        type: 'danger',
+      });
     }
   };
 }
