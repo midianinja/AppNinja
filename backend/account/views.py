@@ -9,10 +9,11 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import Permission
 from django.conf import settings
-from .models import User
+from .models import User, Ninja
 from .serializers import UserSerializer
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 class APIView(BaseAPIView):
     def has_perm_on_object(self, user, obj, perm):
@@ -170,21 +171,33 @@ class Cadastro(BaseAPIView):
 
         def post(self, request, format=None):
              
-        #json_body = json.loads(request.body)['nome']
-        #parsed_json = json.dumps(str(request))
-                #ninja = Ninja(nome=json.loads(request.body)['nome'])
-        #ninja = Ninja(nome="Ninja",cidade="Rio",estado="RJ",pais="BR")
-        #ninja = Ninja(nome=request_json['nome'],
-        #cidade=request_json['cidade'],
-        #estado=request_json['estado'],
-        #pais=request_json['pais'],
-        #telefone=request_json['telefone'])
-                #ninja.save()
+      
+                
+                data = json.loads(request.body)
+                ninja = Ninja(user = request.user,
+                    nome=data['nome'],
+                    cidade=data['cidade'],
+                    estado=data['estado'],
+                    pais=data['nome'],
+                    telefone=data['telefone'],
+                    dataNascimento=data['dataNascimento'],
+                    etnia=data['etnia'],
+                    orientacao=data['orientacao'],
+                    identidade=data['identidade'],
+                    twitter=data['twitter'],
+                    facebook=data['facebook'],
+                    instagram=data['instagram'],
+                    causas=data['causas'],
+                    bio=data['bio'],
+                    profissao=data['profissao']
+                )
+     
+                ninja.save()
        
-                return HttpResponse('JSON')
+                return Response('JSON')
         
         def get(self, request, format=None):
-                 return HttpResponse('JSON')
+                 return Response('JSON')
 
             #elif request.method == 'GET':
                 #return HttpResponse(json.dumps(data),content_type='application/json')
