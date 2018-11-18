@@ -80,6 +80,7 @@ class Cidade(models.Model):
 
     nome = models.CharField(unique=True, max_length=500)
     estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True)
+    pais = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True)
 
 class PerfilNinja(models.Model):
 
@@ -92,7 +93,7 @@ class PerfilNinja(models.Model):
     cidade = models.ForeignKey(Cidade, on_delete=models.SET_NULL, null=True)
 
     telefone = models.CharField(max_length=500)
-    dt_nasc = models.DateField()
+    data_nascimento = models.DateField()
     twitter = models.CharField(max_length=500)
     facebook = models.CharField(max_length=500)
     instagram = models.CharField(max_length=500)
@@ -105,7 +106,7 @@ class PerfilNinja(models.Model):
         (1, 'Feminino'),
         (2, 'Prefiro não declarar'),
     )
-    gender = models.IntegerField(choices=GENDER_CHOICES, null=True)
+    genero = models.IntegerField(choices=GENDER_CHOICES, null=True)
 
     ORIENT_SEX_CHOICES = (
         (0, 'Heterossexual'),
@@ -116,7 +117,7 @@ class PerfilNinja(models.Model):
         (5, 'Fluido'),
         (6, 'Prefiro não declarar')
     )
-    orient_sex = models.IntegerField(choices=ORIENT_SEX_CHOICES, null=True)
+    orientacao_sexual = models.IntegerField(choices=ORIENT_SEX_CHOICES, null=True)
 
     ID_GEN_CHOICES = (
         (0, 'Cisgênero'),
@@ -124,7 +125,7 @@ class PerfilNinja(models.Model):
         (2, 'Neutro ou Não-binario'),
         (3, 'Prefiro não declarar')
     )
-    ident_genero = models.IntegerField(choices=ID_GEN_CHOICES, null=True)
+    identidade_genero = models.IntegerField(choices=ID_GEN_CHOICES, null=True)
 
     ETNIA_CHOICES = (
         (0, 'Negra'),
@@ -135,23 +136,3 @@ class PerfilNinja(models.Model):
         (5, 'Outra')
     )
     etnia = models.IntegerField(choices=ETNIA_CHOICES, null=True)
-
-class Ninja(models.Model):
-    #mapeamento da tabela Ninja, tamanho dos campos não são reais/oficiais
-    nome = models.CharField(max_length=50)
-    cidade = models.CharField(max_length=50)
-    estado = models.CharField(max_length=10)
-    pais = models.CharField(max_length=15)
-    telefone = models.CharField(max_length=15)
-    dataNascimento = models.CharField(max_length=10)
-    genero = models.CharField(max_length=10)
-    etnia = models.CharField(max_length=10)
-    orientacao = models.CharField(max_length=10)
-    identidade = models.CharField(max_length=10)
-    twitter = models.CharField(max_length=10)
-    facebook = models.CharField(max_length=10)
-    instagram = models.CharField(max_length=10)
-    telegram = models.CharField(max_length=10)
-    causas = models.CharField(max_length=10)
-    bio = models.CharField(max_length=10)
-    profissao = models.CharField(max_length=10)
