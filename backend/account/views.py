@@ -12,6 +12,7 @@ from django.conf import settings
 from .models import User
 from .serializers import UserSerializer
 from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_exempt
 
 class APIView(BaseAPIView):
     def has_perm_on_object(self, user, obj, perm):
@@ -83,7 +84,7 @@ class UserList(APIView):
                 [user.email],
                 fail_silently=False,
             )
-
+   
 
 class UserDetail(APIView):
     """
@@ -163,3 +164,29 @@ class AuthLogout(BaseAPIView):
         request.user.auth_token.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+
+class Cadastro(BaseAPIView):
+
+        def post(self, request, format=None):
+             
+        #json_body = json.loads(request.body)['nome']
+        #parsed_json = json.dumps(str(request))
+                #ninja = Ninja(nome=json.loads(request.body)['nome'])
+        #ninja = Ninja(nome="Ninja",cidade="Rio",estado="RJ",pais="BR")
+        #ninja = Ninja(nome=request_json['nome'],
+        #cidade=request_json['cidade'],
+        #estado=request_json['estado'],
+        #pais=request_json['pais'],
+        #telefone=request_json['telefone'])
+                #ninja.save()
+       
+                return HttpResponse('JSON')
+        
+        def get(self, request, format=None):
+                 return HttpResponse('JSON')
+
+            #elif request.method == 'GET':
+                #return HttpResponse(json.dumps(data),content_type='application/json')
+    
+            #return HttpResponse(json.dumps(data),content_type='application/json')
