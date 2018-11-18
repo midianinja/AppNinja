@@ -141,3 +141,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'appninjamailer@gmail.com'
 EMAIL_HOST_PASSWORD = '123mudar!@#'
 EMAIL_PORT = 587
+
+try:
+    from .settings_local import *
+except ImportError:
+    pass
