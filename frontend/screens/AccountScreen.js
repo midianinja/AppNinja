@@ -35,7 +35,7 @@ export default class AccountScreen extends React.Component {
       estado: '',
       pais: '',
       telefone: '',
-      nascimento: '',
+      data_nascimento: '',
       etnia: '',
       genero: '',
       orientacao: '',
@@ -78,7 +78,7 @@ export default class AccountScreen extends React.Component {
             <Input {...theme.accountInput} label='País' editable={this.state.editing} onChangeText={(pais) => this.setState({pais})} value={this.state.pais} />
             <Input {...theme.accountInput} label='Bio' editable={this.state.editing} onChangeText={(bio) => this.setState({bio})} value={this.state.bio} />
             <Input {...theme.accountInput} label='Telefone' editable={this.state.editing} onChangeText={(telefone) => this.setState({telefone})} value={this.state.telefone} />
-            <Input {...theme.accountInput} label='Nascimento' editable={this.state.editing} onChangeText={(nascimento) => this.setState({nascimento})} value={this.state.nascimento} />
+            <Input {...theme.accountInput} label='Nascimento' editable={this.state.editing} onChangeText={(data_nascimento) => this.setState({data_nascimento})} value={this.state.data_nascimento} />
             <Input {...theme.accountInput} label='Etnia' editable={this.state.editing} onChangeText={(etnia) => this.setState({etnia})} value={this.state.etnia} />
             <Input {...theme.accountInput} label='Gênero' editable={this.state.editing} onChangeText={(genero) => this.setState({genero})} value={this.state.genero} />
             <Input {...theme.accountInput} label='Orientação' editable={this.state.editing} onChangeText={(orientacao) => this.setState({orientacao})} value={this.state.orientacao} />
@@ -112,7 +112,7 @@ export default class AccountScreen extends React.Component {
       'estado',
       'pais',
       'telefone',
-      'nascimento',
+      'data_nascimento',
       'etnia',
       'genero',
       'orientacao',
@@ -155,6 +155,8 @@ export default class AccountScreen extends React.Component {
         type: 'danger',
       });
     } else if (!response.ok) {
+      console.log(response);
+
       showMessage({
         message: 'Erro',
         description: 'Ocorreu um erro ao salvar os seus dados :(',
@@ -180,7 +182,7 @@ export default class AccountScreen extends React.Component {
 
     let userToken = await AsyncStorage.getItem('userToken');
 
-    let response = await fetch(process.env.API_URL + 'api/account/', {
+    let response = await fetch(process.env.API_URL + 'api/account/users/me/', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -199,7 +201,7 @@ export default class AccountScreen extends React.Component {
       });
     } else {
       let data = await response.json();
-      this.setState(data.data);
+      this.setState({nome: data.first_name, email: data.email, ...data.ninja});
     }
   };
 }
