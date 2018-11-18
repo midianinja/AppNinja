@@ -178,6 +178,8 @@ export default class AccountScreen extends React.Component {
       return;
     }
 
+    let userToken = await AsyncStorage.getItem('userToken');
+
     let response = await fetch(process.env.API_URL + 'api/account/', {
       method: 'GET',
       headers: {
@@ -187,15 +189,17 @@ export default class AccountScreen extends React.Component {
       },
     });
 
-    if (response) {
-      let data = await response.json();
-      this.setState(data.data);
-    } else {
+    if (!response || !response.ok) {
+      console.log(response);
+
       showMessage({
         message: 'Erro',
         description: 'Ocorreu um erro ao obter os seus dados :(',
         type: 'danger',
       });
+    } else {
+      let data = await response.json();
+      this.setState(data.data);
     }
   };
 }
