@@ -1,5 +1,7 @@
 # APP Ninja
 
+![image alt text](https://github.com/midianinja/AppNinja/blob/master/imgs/wiki/photo5165721424084707342.jpg)
+
 _“Lançando o maior movimento Ninja do universo!”._
 
 **Nós somos Ninjas e acreditamos que podemos transformar o nosso país por meio da lógica de organização social coletiva.
