@@ -23,7 +23,7 @@ Acreditamos que o sucesso do projeto depende diretamente da interação clara e
 objetiva entre os membros. Por isso, estamos definindo algumas
 políticas para que estas interações nos ajudem a crescer juntos! Você pode
 consultar algumas destas boas práticas em nosso [código de
-conduta](https://github.com/portabilis/i-educar/blob/master/CODE_OF_CONDUCT.md).
+conduta](https://github.com/midianinja/AppNinja/blob/master/CODE_OF_CONDUCT.md).
 
 Além disso, gostamos de meios de comunicação assíncrona, onde não há necessidade de
 respostas em tempo real. Isso facilita a produtividade individual dos
