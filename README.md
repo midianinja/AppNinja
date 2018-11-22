@@ -46,7 +46,7 @@ colaboradores do projeto.
 
 Em nossa wiki você encontra um planejamento mais técnico de como devemos
 prosseguir com as melhorias e evoluções do nosso projeto.
-[Clique aqui](https://github.com/)
+[Clique aqui](https://github.com/midianinja/AppNinja/wiki)
 para ler mais a respeito.
 
 ## Como contribuir
@@ -68,24 +68,6 @@ máquina. Para mais informações veja estes links:
 
 Você também vai precisar do [Git](https://git-scm.com/downloads) caso ainda não
 o tenha instalado.
-
-Depois de ter o Docker e git instalados faça o clone deste repositório e execute
-o Docker Compose para criar os containers da aplicação:
-
-```terminal
-git clone https://github.com/portabilis/i-educar.git i-educar
-cd i-educar
-cp .env.example .env
-cp ieducar/configuration/ieducar.ini.sample ieducar/configuration/ieducar.ini
-cp phinx.php.sample phinx.php
-docker-compose up -d
-```
-
-Depois disto faça as alterações necessárias nos arquivos de configuração:
-
-### Inicializando o banco de dados
-
-**Atenção:**
 
 ## Perguntas frequentes (FAQ)
 
