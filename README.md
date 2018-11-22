@@ -40,9 +40,7 @@ colaboradores do projeto.
 
 ### Passos iniciais
 
-- Adoção do [PSR1](https://)
-- Adoção do [PSR2](https://)
-- Adoção do [PSR4](https://)
+- Adoção do [Roadmap](https://github.com/midianinja/AppNinja/projects/1)
 
 ### Planejamento Técnico
 
