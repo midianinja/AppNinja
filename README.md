@@ -1,6 +1,6 @@
 # APP Ninja
 
-![image alt text](https://github.com/midianinja/AppNinja/blob/master/imgs/wiki/photo5165721424084707342.jpg)
+![](https://github.com/midianinja/AppNinja/blob/master/imgs/wiki/photo5165721424084707342.jpg)
 
 _“Lançando o maior movimento Ninja do universo!”._
 
