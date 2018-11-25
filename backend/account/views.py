@@ -7,10 +7,11 @@ from rest_framework.views import APIView as BaseAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.models import Token
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import Permission
 from django.conf import settings
 from .models import User, Ninja, Habilidade, Causa, Interesse, PerfilNinja
-from .serializers import UserSerializer, HabilidadeSerializer, CausaSerializer, InteresseSerializer
+from .serializers import UserSerializer, HabilidadeSerializer, CausaSerializer, InteresseSerializer, PerfilNinjaSerializer
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -65,7 +66,7 @@ class UserList(APIView):
             # contempla o caso do usuário carregado a partir dos cadastros da midia ninja
 
             if not user.is_active:
-                user.password = serializer.data['password']
+                user.password = make_password(serializer.data['password'])
                 user.save()
 
                 if self.envia_email_confirmacao(user):
@@ -253,64 +254,76 @@ class AuthLogout(BaseAPIView):
 
 class Cadastro(BaseAPIView):
 
-        def post(self, request, format=None):
-                
-            data = json.loads(request.body)
+    permission_classes = [IsAuthenticated]
 
-            perfil_ninja = PerfilNinja()
+    def post(self, request, format=None):
 
-            # lembrando que devem ser um valores inteiros correspondente a etnia/orientacao/ident em questao
-            perfil_ninja.etnia = data['etnia']
-            perfil_ninja.orientacao_sexual = data['orientacao'] # semelhante a etnia
-            perfil_ninja.identidade_genero = data['identidade'] # semelhante a etnia
+        data = json.loads(request.body)
 
-            for causa in data['causas']:
-                c = Causa.objects.get(id=causa)
-                perfil_ninja.causas.add(c)
+        perfil_ninja = PerfilNinja()
 
-            for habilidade in data['habilidades']:
-                h = Habilidade.objects.get(id=habilidade)
-                perfil_ninja.habilidades.add(h)
+        perfil_ninja.user = request.user
 
-            for interesse in data['interesses']:
-                i = Interesse.objects.get(id=interesse)
-                perfil_ninja.interesses.add(i)
+        # lembrando que devem ser valores inteiros correspondente a etnia/orientacao/ident em questao
+        perfil_ninja.etnia = data['etnia']
+        perfil_ninja.orientacao_sexual = data['orientacao'] # semelhante a etnia
+        perfil_ninja.identidade_genero = data['identidade'] # semelhante a etnia
 
-            perfil_ninja.twitter = data['twitter']
-            perfil_ninja.telefone = data['telefone']
-            perfil_ninja.cidade = data['cidade']
-            perfil_ninja.facebook = data['facebook']
-            perfil_ninja.instagram = data['instagram']
-            perfil_ninja.bio = data['bio']
-            perfil_ninja.profissao = data['profissao']
-            perfil_ninja.data_nascimento = data['dataNascimento'],
+        for causa in data['causas']:
+            c = Causa.objects.get(id=causa)
+            perfil_ninja.causas.add(c)
 
-            # ninja = Ninja(user = request.user,
-            #     nome=data['nome'],
-            #     cidade=data['cidade'],
-            #     estado=data['estado'],
-            #     pais=data['nome'],
-            #     telefone=data['telefone'],
-            #     dataNascimento=data['dataNascimento'],
-            #     etnia=data['etnia'],
-            #     orientacao=data['orientacao'],
-            #     identidade=data['identidade'],
-            #     twitter=data['twitter'],
-            #     facebook=data['facebook'],
-            #     instagram=data['instagram'],
-            #     causas=data['causas'],
-            #     bio=data['bio'],
-            #     profissao=data['profissao']
-            # )
+        for habilidade in data['habilidades']:
+            h = Habilidade.objects.get(id=habilidade)
+            perfil_ninja.habilidades.add(h)
 
-            perfil_ninja.save()
+        for interesse in data['interesses']:
+            i = Interesse.objects.get(id=interesse)
+            perfil_ninja.interesses.add(i)
 
-            return HttpResponse(status=status.HTTP_200_OK)
-        
-        def get(self, request, format=None):
-                 return Response('JSON')
+        perfil_ninja.twitter = data['twitter']
+        perfil_ninja.telefone = data['telefone']
+        perfil_ninja.cidade = data['cidade']
+        perfil_ninja.facebook = data['facebook']
+        perfil_ninja.instagram = data['instagram']
+        perfil_ninja.bio = data['bio']
+        perfil_ninja.profissao = data['profissao']
+        perfil_ninja.data_nascimento = data['dataNascimento'],
 
-            #elif request.method == 'GET':
-                #return HttpResponse(json.dumps(data),content_type='application/json')
-    
+        # ninja = Ninja(user = request.user,
+        #     nome=data['nome'],
+        #     cidade=data['cidade'],
+        #     estado=data['estado'],
+        #     pais=data['nome'],
+        #     telefone=data['telefone'],
+        #     dataNascimento=data['dataNascimento'],
+        #     etnia=data['etnia'],
+        #     orientacao=data['orientacao'],
+        #     identidade=data['identidade'],
+        #     twitter=data['twitter'],
+        #     facebook=data['facebook'],
+        #     instagram=data['instagram'],
+        #     causas=data['causas'],
+        #     bio=data['bio'],
+        #     profissao=data['profissao']
+        # )
+
+        perfil_ninja.save()
+
+        return HttpResponse(status=status.HTTP_200_OK)
+
+    def get(self, request, format=None):
+
+        user = request.user
+        try:
+            perfil_ninja = user.perfilninja
+            serializer = PerfilNinjaSerializer(perfil_ninja)
+
+            return Response(serializer.data, status.HTTP_200_OK)
+        except:
+            return HttpResponse(status.HTTP_204_NO_CONTENT)
+
+        #elif request.method == 'GET':
             #return HttpResponse(json.dumps(data),content_type='application/json')
+
+        #return HttpResponse(json.dumps(data),content_type='application/json')
