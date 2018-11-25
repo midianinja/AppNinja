@@ -34,6 +34,7 @@ class UserManager(BaseUserManager):
 class User(AbstractUser):
 
     username = None
+    recover = models.BooleanField(default=False)
     email = models.EmailField('email address', unique=True)
 
     USERNAME_FIELD = 'email'
