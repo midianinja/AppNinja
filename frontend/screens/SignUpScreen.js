@@ -68,7 +68,7 @@ export default class SignUpScreen extends React.Component {
     }
     this.setState({ isLoading: true });
 
-    fetch(process.env.API_URL + 'account/', {
+    let response = await fetch(process.env.API_URL + 'api/account/users/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -76,26 +76,39 @@ export default class SignUpScreen extends React.Component {
       },
       body: JSON.stringify({
         email: this.state.email,
-        username: this.state.username,
+        first_name: this.state.username,
         password: this.state.password,
-        passwordConfirm: this.state.passwordConfirm,
       }),
-    }).then((response) => {
-      let data = response.json();
-      showMessage({
-        message: 'Email enviado',
-        description: 'Um email foi enviado para a ativação da sua conta',
-        type: 'success',
-      });
-      this.props.navigation.navigate('SignIn');
-    }).catch((error) => {
-      this.setState({ isLoading: false });
+    });
+
+    this.setState({ isLoading: false });
+
+    if (!response || !response.ok) {
       showMessage({
         message: 'Erro',
         description: 'Ocorreu um erro de comunicação com o servidor',
         type: 'danger',
       });
-    });
+    } else {
+      let data = await response.json();
+
+      // A requisição retorna um id caso a conta tenha sido criada
+      // caso contrário, a conta já existe
+      if (data.id) {
+        showMessage({
+          message: 'Email enviado',
+          description: 'Um email foi enviado para a ativação da sua conta',
+          type: 'success',
+        });
+        this.props.navigation.navigate('SignIn');
+      } else {
+        showMessage({
+          message: 'Erro',
+          description: 'Já existe uma conta cadastrada para este email',
+          type: 'danger',
+        });
+      }
+    }
   };
 
   _checkIfEnabled = () => {
