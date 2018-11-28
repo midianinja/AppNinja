@@ -127,7 +127,7 @@ class UserList(APIView):
         if user.recover == True and token == Token.objects.get(user=user).key:
 
             user.recover = False
-            user.password = data['password']
+            user.password = make_password(data['password'])
             user.is_active = True
             user.save()
 
