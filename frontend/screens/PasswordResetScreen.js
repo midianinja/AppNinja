@@ -53,31 +53,37 @@ export default class PasswordResetScreen extends React.Component {
   _passwordResetAsync = async () => {
     this.setState({ isLoading: true });
 
-    fetch(process.env.API_URL + 'password_reset/', {
+    let formData = new FormData();
+    formData.append("email", this.state.email);
+
+    let response = await fetch(process.env.API_URL + 'api/account/users/send-recover/', {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-      }),
-    }).then((response) => {
-      let data = response.json();
-      showMessage({
-        message: 'Email enviado',
-        description: 'Um email foi enviado para a redefinição da sua senha',
-        type: 'success',
-      });
-      this.props.navigation.navigate('SignIn');
-    }).catch((error) => {
-      this.setState({ isLoading: false });
+      body: formData,
+    });
+
+    this.setState({isLoading: false});
+
+    if (!response) {
       showMessage({
         message: 'Erro',
         description: 'Ocorreu um erro de comunicação com o servidor',
         type: 'danger',
       });
-    });
+    } else if (!response.ok) {
+      showMessage({
+        message: 'Erro',
+        description: 'E-mail não encontrado',
+        type: 'danger',
+      });
+    } else {
+      showMessage({
+        message: 'Email enviado',
+        description: 'Um email foi enviado para a redefinição da sua senha',
+        type: 'success',
+      });
+
+      this.props.navigation.navigate('App');
+    }
   };
 
   _checkIfEnabled = () => {
