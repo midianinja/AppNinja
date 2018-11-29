@@ -258,7 +258,7 @@ class Cadastro(BaseAPIView):
 
     def post(self, request, format=None):
 
-        data = json.loads(request.body)
+        data = request.data
 
         perfil_ninja = PerfilNinja()
 
