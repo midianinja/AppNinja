@@ -288,7 +288,7 @@ class Cadastro(BaseAPIView):
         perfil_ninja.instagram = data['instagram']
         perfil_ninja.bio = data['bio']
         perfil_ninja.profissao = data['profissao']
-        perfil_ninja.data_nascimento = data['dataNascimento'],
+        perfil_ninja.data_nascimento = data['dataNascimento']
 
         # ninja = Ninja(user = request.user,
         #     nome=data['nome'],
