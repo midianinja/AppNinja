@@ -10,7 +10,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import Permission
 from django.conf import settings
-from .models import User, Ninja, Habilidade, Causa, Interesse, PerfilNinja
+from .models import User, Ninja, Habilidade, Causa, Interesse, PerfilNinja, Cidade
 from .serializers import UserSerializer, HabilidadeSerializer, CausaSerializer, InteresseSerializer, PerfilNinjaSerializer
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
@@ -283,7 +283,7 @@ class Cadastro(BaseAPIView):
 
         perfil_ninja.twitter = data['twitter']
         perfil_ninja.telefone = data['telefone']
-        perfil_ninja.cidade = data['cidade']
+        perfil_ninja.cidade = Cidade.objects.get(nome=data['cidade'])
         perfil_ninja.facebook = data['facebook']
         perfil_ninja.instagram = data['instagram']
         perfil_ninja.bio = data['bio']
