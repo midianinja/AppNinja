@@ -35,7 +35,7 @@ export default class AccountScreen extends React.Component {
       estado: '',
       pais: '',
       telefone: '',
-      data_nascimento: '',
+      dataNascimento: '',
       etnia: '',
       genero: '',
       orientacao: '',
@@ -46,6 +46,9 @@ export default class AccountScreen extends React.Component {
       identidade: '',
       profissao: '',
       bio: '',
+      habilidades: '',
+      interesses: '',
+      twitter: '',
       editing: false,
       isLoading: false,
     };
@@ -78,7 +81,7 @@ export default class AccountScreen extends React.Component {
             <Input {...theme.accountInput} label='País' editable={this.state.editing} onChangeText={(pais) => this.setState({pais})} value={this.state.pais} />
             <Input {...theme.accountInput} label='Bio' editable={this.state.editing} onChangeText={(bio) => this.setState({bio})} value={this.state.bio} />
             <Input {...theme.accountInput} label='Telefone' editable={this.state.editing} onChangeText={(telefone) => this.setState({telefone})} value={this.state.telefone} />
-            <Input {...theme.accountInput} label='Nascimento' editable={this.state.editing} onChangeText={(data_nascimento) => this.setState({data_nascimento})} value={this.state.data_nascimento} />
+            <Input {...theme.accountInput} label='Nascimento' editable={this.state.editing} onChangeText={(dataNascimento) => this.setState({dataNascimento})} value={this.state.dataNascimento} />
             <Input {...theme.accountInput} label='Etnia' editable={this.state.editing} onChangeText={(etnia) => this.setState({etnia})} value={this.state.etnia} />
             <Input {...theme.accountInput} label='Gênero' editable={this.state.editing} onChangeText={(genero) => this.setState({genero})} value={this.state.genero} />
             <Input {...theme.accountInput} label='Orientação' editable={this.state.editing} onChangeText={(orientacao) => this.setState({orientacao})} value={this.state.orientacao} />
@@ -112,7 +115,7 @@ export default class AccountScreen extends React.Component {
       'estado',
       'pais',
       'telefone',
-      'data_nascimento',
+      'dataNascimento',
       'etnia',
       'genero',
       'orientacao',
@@ -123,6 +126,9 @@ export default class AccountScreen extends React.Component {
       'identidade',
       'profissao',
       'bio',
+      'habilidades',
+      'interesses',
+      'twitter',
     ];
 
     let data = fields.reduce((acc, el) => {
