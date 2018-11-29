@@ -269,16 +269,16 @@ class Cadastro(BaseAPIView):
         perfil_ninja.orientacao_sexual = data['orientacao'] # semelhante a etnia
         perfil_ninja.identidade_genero = data['identidade'] # semelhante a etnia
 
-        for causa in data['causas']:
-            c = Causa.objects.get(id=causa)
+        for causa in data['causas'].split():
+            c = Causa.objects.get(descricao=causa)
             perfil_ninja.causas.add(c)
 
-        for habilidade in data['habilidades']:
-            h = Habilidade.objects.get(id=habilidade)
+        for habilidade in data['habilidades'].split():
+            h = Habilidade.objects.get(descricao=habilidade)
             perfil_ninja.habilidades.add(h)
 
-        for interesse in data['interesses']:
-            i = Interesse.objects.get(id=interesse)
+        for interesse in data['interesses'].split():
+            i = Interesse.objects.get(descricao=interesse)
             perfil_ninja.interesses.add(i)
 
         perfil_ninja.twitter = data['twitter']
