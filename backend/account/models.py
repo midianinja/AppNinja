@@ -70,6 +70,7 @@ class Causa(models.Model):
 class Pais(models.Model):
 
     nome = models.CharField(unique=True, max_length=500)
+    is_brazil = models.CharField(default=False)
 
 class Estado(models.Model):
 
@@ -81,7 +82,17 @@ class Cidade(models.Model):
 
     nome = models.CharField(unique=True, max_length=500)
     estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True)
-    pais = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True)
+    """
+    o link entre cidade e país faz sentido para os casos de estrangeiras, onde não necessariamente
+    teremos facilidade de acesso a informação do estado (ou província, ou algo similar).
+    entretanto, este mesmo link abre possibilidades para que uma mesma cidade tenha ligação 
+    com dois países: uma ligação direta e outra diferente através de um estado.
+    com isso, imagino que a melhor abordagem seja não permitir o acesso direto ao país e forçar 
+    a ligação da cidade com um estado. com isso, nos casos de países além do brasil, pode-se criar um estado 
+    único que conterá todas as cidades daquele país. 
+    """
+    # pais = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True)
+
 
 class PerfilNinja(models.Model):
 
