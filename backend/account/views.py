@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.shortcuts import render
 from django.http import Http404, JsonResponse, HttpResponse
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView as BaseAPIView
@@ -9,19 +8,19 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import Permission
-from django.conf import settings
-from .models import User, Ninja, Habilidade, Causa, Interesse, PerfilNinja, Cidade
-from .serializers import UserSerializer, HabilidadeSerializer, CausaSerializer, InteresseSerializer, PerfilNinjaSerializer
+from .models import User, Habilidade, Causa, Interesse, PerfilNinja, Cidade
+from .serializers import UserSerializer, HabilidadeSerializer, CausaSerializer, InteresseSerializer, \
+        PerfilNinjaSerializer
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
-import json
+
 
 class APIView(BaseAPIView):
     def has_perm_on_object(self, user, obj, perm):
         return user.is_superuser or user.id == obj.id
 
-class UserList(APIView):
 
+class UserList(APIView):
     """
     List all users or create a new one
     """
@@ -71,7 +70,6 @@ class UserList(APIView):
 
                 if self.envia_email_confirmacao(user):
                     return Response(serializer.data, status=status.HTTP_200_OK)
-
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -124,7 +122,7 @@ class UserList(APIView):
     def recover_password(request, user_id, token):
         user = User.objects.get(id=user_id)
         data = request.POST
-        if user.recover == True and token == Token.objects.get(user=user).key:
+        if user.recover is True and token == Token.objects.get(user=user).key:
 
             user.recover = False
             user.password = make_password(data['password'])
@@ -144,7 +142,7 @@ class UserList(APIView):
 
     def email_verification(request, user_id, token):
         user = User.objects.get(id=user_id)
-        if user.is_active == False and token == Token.objects.get(user=user).key:
+        if user.is_active is False and token == Token.objects.get(user=user).key:
             user.is_active = True
             user.save()
 
@@ -217,39 +215,43 @@ class UserDetail(APIView):
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 class UserMe(UserDetail):
 
     def get(self, request, format=None):
-        return super().get(request, request
- .user.id, format)
+        return super().get(request, request.user.id, format)
+
     def put(self, request, format=None):
         return super().put(request, request.user.id, format)
+
     def delete(self, request, format=None):
         return super().delete(request, request.user.id, format)
+
 
 class AuthLogin(BaseAPIView):
 
     permission_classes = [AllowAny]
+
     def post(self, request, format=None):
         for field in ('email', 'password'):
             if not request.data.get(field):
-                return Response("E-mail, password are required", status=status.HTTP_401_UNAUTHORIZED)            
+                return Response("E-mail, password are required", status=status.HTTP_401_UNAUTHORIZED)
         try:
             user = User.objects.get(email=request.data['email'])
-        except:
+        except Exception:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
         if not user.check_password(request.data['password']):
             return Response(status=status.HTTP_401_UNAUTHORIZED)
         (token, created) = Token.objects.get_or_create(user=user)
-        return Response({ 'data': {'token': token.key }})
+        return Response({'data': {'token': token.key}})
 
 
 class AuthLogout(BaseAPIView):
     permission_classes = [IsAuthenticated]
+
     def delete(self, request):
         request.user.auth_token.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 
 class Cadastro(BaseAPIView):
@@ -266,8 +268,8 @@ class Cadastro(BaseAPIView):
 
         # lembrando que devem ser valores inteiros correspondente a etnia/orientacao/ident em questao
         perfil_ninja.etnia = data['etnia']
-        perfil_ninja.orientacao_sexual = data['orientacao'] # semelhante a etnia
-        perfil_ninja.identidade_genero = data['identidade'] # semelhante a etnia
+        perfil_ninja.orientacao_sexual = data['orientacao']  # semelhante a etnia
+        perfil_ninja.identidade_genero = data['identidade']  # semelhante a etnia
 
         for causa in data['causas'].split():
             c = Causa.objects.get(descricao=causa)
@@ -320,10 +322,10 @@ class Cadastro(BaseAPIView):
             serializer = PerfilNinjaSerializer(perfil_ninja)
 
             return Response(serializer.data, status.HTTP_200_OK)
-        except:
+        except Exception:
             return HttpResponse(status.HTTP_204_NO_CONTENT)
 
-        #elif request.method == 'GET':
-            #return HttpResponse(json.dumps(data),content_type='application/json')
+        # elif request.method == 'GET':
+        # return HttpResponse(json.dumps(data),content_type='application/json')
 
-        #return HttpResponse(json.dumps(data),content_type='application/json')
+        # return HttpResponse(json.dumps(data),content_type='application/json')

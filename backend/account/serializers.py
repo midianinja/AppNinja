@@ -42,10 +42,8 @@ class UserSerializer(serializers.ModelSerializer):
         return super().create(data)
 
     # ninja = NinjaSerializer()
-    
+
     class Meta:
         model = User
-        fields = ('id', 'email', 'first_name', 'last_name', 'password', 'is_superuser', 'groups') # , 'ninja')
+        fields = ('id', 'email', 'first_name', 'last_name', 'password', 'is_superuser', 'groups')  # , 'ninja')
         extra_kwargs = {'password': {'write_only': True, 'required': False}}
-
-

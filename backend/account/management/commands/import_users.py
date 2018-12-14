@@ -1,7 +1,10 @@
-import os, pandas, secrets, string
+import pandas
+import secrets
+import string
 from account.models import User, Ninja
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.db.utils import IntegrityError
+
 
 class Command(BaseCommand):
     help = 'Importa base de usuários do Seja Ninja'
@@ -25,7 +28,6 @@ class Command(BaseCommand):
     def generate_password(self):
         alphabet = string.ascii_letters + string.digits
         return ''.join(secrets.choice(alphabet) for i in range(8))
-        
 
     def import_user(self, data):
         email = data.Email
@@ -44,12 +46,9 @@ class Command(BaseCommand):
             cidade=data.Cidade,
             estado=data.Estado,
             pais=data['País'],
-            telefone = data.Telefone,
-            dataNascimento = data['Data de Nascimento'],
-            genero = data['Gênero'],
-            etnia = data['Etnia'],
+            telefonl=data.Telefone,
+            dataNascimento=data['Data de Nascimento'],
+            genero=data['Gênero'],
+            etnia=data['Etnia'],
         )
         Ninja.objects.create(**ninja)
-        
-        
-
