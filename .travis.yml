@@ -8,6 +8,7 @@ install:
     - pip install -U tox
 
 script:
+    - cd backend
     - make style
     - tox
 
