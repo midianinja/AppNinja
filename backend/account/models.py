@@ -92,11 +92,11 @@ class Cidade(models.Model):
     """
     o link entre cidade e país faz sentido para os casos de estrangeiras, onde não necessariamente
     teremos facilidade de acesso a informação do estado (ou província, ou algo similar).
-    entretanto, este mesmo link abre possibilidades para que uma mesma cidade tenha ligação 
+    entretanto, este mesmo link abre possibilidades para que uma mesma cidade tenha ligação
     com dois países: uma ligação direta e outra diferente através de um estado.
-    com isso, imagino que a melhor abordagem seja não permitir o acesso direto ao país e forçar 
-    a ligação da cidade com um estado. com isso, nos casos de países além do brasil, pode-se criar um estado 
-    único que conterá todas as cidades daquele país. 
+    com isso, imagino que a melhor abordagem seja não permitir o acesso direto ao país e forçar
+    a ligação da cidade com um estado. com isso, nos casos de países além do brasil, pode-se criar um estado
+    único que conterá todas as cidades daquele país.
     """
     # pais = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True)
 
