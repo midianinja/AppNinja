@@ -46,7 +46,7 @@ class Command(BaseCommand):
             cidade=data.Cidade,
             estado=data.Estado,
             pais=data['País'],
-            telefonl=data.Telefone,
+            telefone=data.Telefone,
             dataNascimento=data['Data de Nascimento'],
             genero=data['Gênero'],
             etnia=data['Etnia'],
