@@ -1,0 +1,18 @@
+language: python
+python: 3.7
+dist: xenial
+sudo: false
+env:
+    - TOXENV=py37
+
+install:
+    - pip install -U tox
+
+script:
+    - cd backend
+    - make style
+    - tox
+
+cache:
+  directories:
+    - $HOME/.cache/pip

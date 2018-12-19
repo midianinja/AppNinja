@@ -15,4 +15,3 @@ admin.site.register(Cidade)
 admin.site.register(PerfilNinja)
 admin.site.register(Ninja)
 admin.site.register(User)
-

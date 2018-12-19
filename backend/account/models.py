@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
+
 class UserManager(BaseUserManager):
 
     use_in_migrations = True
@@ -31,6 +32,7 @@ class UserManager(BaseUserManager):
 
         return self._create_user(email, first_name, password, **extra_fields)
 
+
 class User(AbstractUser):
 
     username = None
@@ -53,12 +55,14 @@ class Habilidade(models.Model):
     def __str__(self):
         return self.descricao
 
+
 class Interesse(models.Model):
 
     descricao = models.CharField(unique=True, max_length=500)
 
     def __str__(self):
         return self.descricao
+
 
 class Causa(models.Model):
 
@@ -67,16 +71,19 @@ class Causa(models.Model):
     def __str__(self):
         return self.descricao
 
+
 class Pais(models.Model):
 
     nome = models.CharField(unique=True, max_length=500)
     is_brazil = models.CharField(default=False)
+
 
 class Estado(models.Model):
 
     nome = models.CharField(unique=True, max_length=500)
     sigla_uf = models.CharField(unique=True, null=True, max_length=500)
     pais = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True)
+
 
 class Cidade(models.Model):
 
@@ -85,11 +92,11 @@ class Cidade(models.Model):
     """
     o link entre cidade e país faz sentido para os casos de estrangeiras, onde não necessariamente
     teremos facilidade de acesso a informação do estado (ou província, ou algo similar).
-    entretanto, este mesmo link abre possibilidades para que uma mesma cidade tenha ligação 
+    entretanto, este mesmo link abre possibilidades para que uma mesma cidade tenha ligação
     com dois países: uma ligação direta e outra diferente através de um estado.
-    com isso, imagino que a melhor abordagem seja não permitir o acesso direto ao país e forçar 
-    a ligação da cidade com um estado. com isso, nos casos de países além do brasil, pode-se criar um estado 
-    único que conterá todas as cidades daquele país. 
+    com isso, imagino que a melhor abordagem seja não permitir o acesso direto ao país e forçar
+    a ligação da cidade com um estado. com isso, nos casos de países além do brasil, pode-se criar um estado
+    único que conterá todas as cidades daquele país.
     """
     # pais = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True)
 
@@ -149,9 +156,10 @@ class PerfilNinja(models.Model):
     )
     etnia = models.IntegerField(choices=ETNIA_CHOICES, null=True)
 
+
 class Ninja(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    #mapeamento da tabela Ninja, tamanho dos campos não são reais/oficiais
+    # mapeamento da tabela Ninja, tamanho dos campos não são reais/oficiais
     nome = models.CharField(max_length=50)
     cidade = models.CharField(max_length=50)
     estado = models.CharField(max_length=10)

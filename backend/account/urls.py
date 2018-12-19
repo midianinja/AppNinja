@@ -1,8 +1,7 @@
 from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import UserList, UserDetail, UserMe, AuthLogin, Cadastro
-from . import views
-#import ipdb; ipdb.set_trace()
+from .views import UserList, UserDetail, UserMe, Cadastro
+
 
 urlpatterns = [
     url(r'^users/?$', UserList.as_view()),
