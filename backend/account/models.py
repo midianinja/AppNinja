@@ -75,7 +75,7 @@ class Causa(models.Model):
 class Pais(models.Model):
 
     nome = models.CharField(unique=True, max_length=500)
-    is_brazil = models.CharField(default=False)
+    is_brazil = models.CharField(default=False, max_length=1)
 
 
 class Estado(models.Model):
