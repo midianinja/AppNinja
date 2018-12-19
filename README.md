@@ -1,5 +1,7 @@
 # APP Ninja
 
+![](https://github.com/midianinja/AppNinja/blob/master/imgs/wiki/photo5165721424084707342.jpg)
+
 _“Lançando o maior movimento Ninja do universo!”._
 
 **Nós somos Ninjas e acreditamos que podemos transformar o nosso país por meio da lógica de organização social coletiva.
@@ -16,14 +18,13 @@ _“Lançando o maior movimento Ninja do universo!”._
 
 ## Sobre o APP Ninja
 
-
 ## Comunicação
 
 Acreditamos que o sucesso do projeto depende diretamente da interação clara e
 objetiva entre os membros. Por isso, estamos definindo algumas
 políticas para que estas interações nos ajudem a crescer juntos! Você pode
 consultar algumas destas boas práticas em nosso [código de
-conduta](https://github.com/portabilis/i-educar/blob/master/CODE_OF_CONDUCT.md).
+conduta](https://github.com/midianinja/AppNinja/blob/master/CODE_OF_CONDUCT.md).
 
 Além disso, gostamos de meios de comunicação assíncrona, onde não há necessidade de
 respostas em tempo real. Isso facilita a produtividade individual dos
@@ -33,6 +34,7 @@ colaboradores do projeto.
 |----------------------|-----------|
 | [Issues do Github](https://github.com/midianinja/AppNinja/issues) | - Sugestão de novas funcionalidades<br> - Reportar bugs<br> - Discussões técnicas |
 | [Telegram](https:// ) | - Comunicar novidades sobre o projeto<br> - Movimentar a comunidade<br>  - Falar tópicos que **não** demandem discussões profundas |
+
 
 ## Roadmap de tecnologia
 
