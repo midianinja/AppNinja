@@ -2,11 +2,7 @@ FROM python:3-alpine
 
 WORKDIR /usr/src/app
 
-RUN pwd
-
 COPY . .
-
-RUN ls
 
 RUN pip install -r requirements.txt
 
