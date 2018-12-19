@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
+
 class UserManager(BaseUserManager):
 
     use_in_migrations = True
@@ -31,8 +32,11 @@ class UserManager(BaseUserManager):
 
         return self._create_user(email, first_name, password, **extra_fields)
 
+
 class User(AbstractUser):
+
     username = None
+    recover = models.BooleanField(default=False)
     email = models.EmailField('email address', unique=True)
 
     USERNAME_FIELD = 'email'
@@ -40,12 +44,88 @@ class User(AbstractUser):
 
     objects = UserManager()
 
+
+# Create your models here.
+
+
+class Habilidade(models.Model):
+
+    descricao = models.CharField(unique=True, max_length=500)
+
+    def __str__(self):
+        return self.descricao
+
+
+class Interesse(models.Model):
+
+    descricao = models.CharField(unique=True, max_length=500)
+
+    def __str__(self):
+        return self.descricao
+
+
+class Causa(models.Model):
+
+    descricao = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.descricao
+
+
+class Pais(models.Model):
+
+    nome = models.CharField(unique=True, max_length=500)
+    is_brazil = models.CharField(default=False, max_length=1)
+
+
+class Estado(models.Model):
+
+    nome = models.CharField(unique=True, max_length=500)
+    sigla_uf = models.CharField(unique=True, null=True, max_length=500)
+    pais = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True)
+
+
+class Cidade(models.Model):
+
+    nome = models.CharField(unique=True, max_length=500)
+    estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True)
+    """
+    o link entre cidade e país faz sentido para os casos de estrangeiras, onde não necessariamente
+    teremos facilidade de acesso a informação do estado (ou província, ou algo similar).
+    entretanto, este mesmo link abre possibilidades para que uma mesma cidade tenha ligação
+    com dois países: uma ligação direta e outra diferente através de um estado.
+    com isso, imagino que a melhor abordagem seja não permitir o acesso direto ao país e forçar
+    a ligação da cidade com um estado. com isso, nos casos de países além do brasil, pode-se criar um estado
+    único que conterá todas as cidades daquele país.
+    """
+    # pais = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True)
+
+
+class PerfilNinja(models.Model):
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    interesses = models.ManyToManyField(Interesse)
+    causas = models.ManyToManyField(Causa)
+    habilidades = models.ManyToManyField(Habilidade)
+
+    cidade = models.ForeignKey(Cidade, on_delete=models.SET_NULL, null=True)
+
+    telefone = models.CharField(max_length=500)
+    data_nascimento = models.DateField()
+    twitter = models.CharField(max_length=500)
+    facebook = models.CharField(max_length=500)
+    instagram = models.CharField(max_length=500)
+    telegram = models.CharField(max_length=500)
+    profissao = models.CharField(max_length=500)
+    bio = models.TextField('bio', max_length=500)
+
     GENDER_CHOICES = (
         (0, 'Masculino'),
         (1, 'Feminino'),
         (2, 'Prefiro não declarar'),
     )
-    gender = models.IntegerField(choices=GENDER_CHOICES, null=True)
+    genero = models.IntegerField(choices=GENDER_CHOICES, null=True)
 
     ORIENT_SEX_CHOICES = (
         (0, 'Heterossexual'),
@@ -56,7 +136,7 @@ class User(AbstractUser):
         (5, 'Fluido'),
         (6, 'Prefiro não declarar')
     )
-    orient_sex = models.IntegerField(choices=ORIENT_SEX_CHOICES, null=True)
+    orientacao_sexual = models.IntegerField(choices=ORIENT_SEX_CHOICES, null=True)
 
     ID_GEN_CHOICES = (
         (0, 'Cisgênero'),
@@ -64,7 +144,7 @@ class User(AbstractUser):
         (2, 'Neutro ou Não-binario'),
         (3, 'Prefiro não declarar')
     )
-    ident_genero = models.IntegerField(choices=ID_GEN_CHOICES, null=True)
+    identidade_genero = models.IntegerField(choices=ID_GEN_CHOICES, null=True)
 
     ETNIA_CHOICES = (
         (0, 'Negra'),
@@ -76,4 +156,24 @@ class User(AbstractUser):
     )
     etnia = models.IntegerField(choices=ETNIA_CHOICES, null=True)
 
-# Create your models here.
+
+class Ninja(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # mapeamento da tabela Ninja, tamanho dos campos não são reais/oficiais
+    nome = models.CharField(max_length=50)
+    cidade = models.CharField(max_length=50)
+    estado = models.CharField(max_length=10)
+    pais = models.CharField(max_length=15)
+    telefone = models.CharField(max_length=15)
+    dataNascimento = models.CharField(max_length=10)
+    genero = models.CharField(max_length=10)
+    etnia = models.CharField(max_length=10)
+    orientacao = models.CharField(max_length=10)
+    identidade = models.CharField(max_length=10)
+    twitter = models.CharField(max_length=10)
+    facebook = models.CharField(max_length=10)
+    instagram = models.CharField(max_length=10)
+    telegram = models.CharField(max_length=10)
+    causas = models.CharField(max_length=10)
+    bio = models.CharField(max_length=10)
+    profissao = models.CharField(max_length=10)

@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+import sys
+from os.path import dirname, abspath, sep, join
+from subprocess import call, Popen, PIPE
+
+curdir = dirname(abspath(__file__))
+srcdir = join(sep.join(curdir.split(sep)[:-2]), 'backend')
+script = join(srcdir, 'tools', 'pep8', 'pep8ninja.py')
+
+# only check the files that were staged, but do not include
+# deleted files.
+proc = Popen(['git', 'diff', '--cached', '--name-status', 'HEAD'], stdout=PIPE)
+proc.wait()
+
+# This gives output like the following:
+#
+#    A       examples/widgets/lists/list_simple_in_kv.py
+#    A       examples/widgets/lists/list_simple_in_kv_2.py
+#    D       kivy/uix/observerview.py
+#
+# So check for D entries and remove them from targets.
+#
+targets = []
+for target in proc.stdout:
+    parts = [p.strip() for p in target.split()]
+    if parts[0] != 'D':
+        targets.append(join(srcdir, target.decode(encoding='UTF-8')))
+
+# Untested possibility: After making the changes above for removing deleted
+# files from targets, saw also where the git diff call could be:
+#
+#    git diff --cached --name-only --diff-filter=ACM
+#                                                    (leaving off D)
+#
+# and we could then remove the special handling in python for targets above.
+
+call(['git', 'stash', 'save', '--keep-index', '--quiet'])
+retval = call([sys.executable, script, srcdir] + targets)
+call(['git', 'stash', 'pop', '--quiet'])
+
+if retval:
+    # There are styleguide violations
+    print("Error:", retval, "styleguide violation(s) encountered!")
+    print("Your commit has been aborted. Please fix the violations and retry.")
+    sys.exit(retval)

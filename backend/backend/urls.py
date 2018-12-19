@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from account.views import AuthLogin, AuthLogout
 
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'api/account/', include('account.urls')),

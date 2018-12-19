@@ -18,7 +18,6 @@ _“Lançando o maior movimento Ninja do universo!”._
 
 ## Sobre o APP Ninja
 
-
 ## Comunicação
 
 Acreditamos que o sucesso do projeto depende diretamente da interação clara e
@@ -36,17 +35,20 @@ colaboradores do projeto.
 | [Issues do Github](https://github.com/midianinja/AppNinja/issues) | - Sugestão de novas funcionalidades<br> - Reportar bugs<br> - Discussões técnicas |
 | [Telegram](https:// ) | - Comunicar novidades sobre o projeto<br> - Movimentar a comunidade<br>  - Falar tópicos que **não** demandem discussões profundas |
 
+
 ## Roadmap de tecnologia
 
 ### Passos iniciais
 
-- Adoção do [Roadmap](https://github.com/midianinja/AppNinja/projects/1)
+- Adoção do [PSR1](https://)
+- Adoção do [PSR2](https://)
+- Adoção do [PSR4](https://)
 
 ### Planejamento Técnico
 
 Em nossa wiki você encontra um planejamento mais técnico de como devemos
 prosseguir com as melhorias e evoluções do nosso projeto.
-[Clique aqui](https://github.com/midianinja/AppNinja/wiki)
+[Clique aqui](https://github.com/)
 para ler mais a respeito.
 
 ## Como contribuir
@@ -68,6 +70,24 @@ máquina. Para mais informações veja estes links:
 
 Você também vai precisar do [Git](https://git-scm.com/downloads) caso ainda não
 o tenha instalado.
+
+Depois de ter o Docker e git instalados faça o clone deste repositório e execute
+o Docker Compose para criar os containers da aplicação:
+
+```terminal
+git clone https://github.com/portabilis/i-educar.git i-educar
+cd i-educar
+cp .env.example .env
+cp ieducar/configuration/ieducar.ini.sample ieducar/configuration/ieducar.ini
+cp phinx.php.sample phinx.php
+docker-compose up -d
+```
+
+Depois disto faça as alterações necessárias nos arquivos de configuração:
+
+### Inicializando o banco de dados
+
+**Atenção:**
 
 ## Perguntas frequentes (FAQ)
 

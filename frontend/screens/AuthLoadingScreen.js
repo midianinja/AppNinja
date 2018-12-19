@@ -29,7 +29,7 @@ export default class AuthLoadingScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.splashScreen} source={require('../assets/images/splash.png')} />
+        <Image style={styles.splashScreen} source={require('../assets/images/splash.jpg')} />
       </View>
     );
   }
