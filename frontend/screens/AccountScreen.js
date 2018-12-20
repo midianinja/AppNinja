@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
 import theme from '../constants/Theme';
-
+import Env from '../constants/Environment';
 export default class AccountScreen extends React.Component {
   static navigationOptions = {
     header: null,
@@ -142,7 +142,7 @@ export default class AccountScreen extends React.Component {
     let userToken = await AsyncStorage.getItem('userToken');
     await AsyncStorage.setItem('user', dataString);
 
-    let response = await fetch(process.env.API_URL + 'api/account/cadastro/', {
+    let response = await fetch(Env.apiUrl + 'api/account/cadastro/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -188,7 +188,7 @@ export default class AccountScreen extends React.Component {
 
     let userToken = await AsyncStorage.getItem('userToken');
 
-    let response = await fetch(process.env.API_URL + 'api/account/users/me/', {
+    let response = await fetch(Env.apiUrl + 'api/account/users/me/', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
