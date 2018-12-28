@@ -76,8 +76,8 @@ class UserList(APIView):
 
     def envia_email_confirmacao(self, user):
         host = os.environ['BACKEND_HOST']
-        link = 'http://$host/api/account/users/confirm/{ID}/{TOKEN}'
-        link = link.format(ID=user.id, TOKEN=Token.objects.get_or_create(user=user)[0].pk)
+        link = 'http://{HOST}/api/account/users/confirm/{ID}/{TOKEN}'
+        link = link.format(HOST=host, ID=user.id, TOKEN=Token.objects.get_or_create(user=user)[0].pk)
 
         msg = 'Clique em {LINK} para confirmar seu email'.format(LINK=link)
 
@@ -102,8 +102,8 @@ class UserList(APIView):
 
                 user.save()
                 host = os.environ['BACKEND_HOST']
-                link = 'http://$host/api/account/users/recover/{ID}/{TOKEN}'
-                link = link.format(ID=user.id, TOKEN=Token.objects.get_or_create(user=user)[0].pk)
+                link = 'http://{HOST}/api/account/users/recover/{ID}/{TOKEN}'
+                link = link.format(HOST=host, ID=user.id, TOKEN=Token.objects.get_or_create(user=user)[0].pk)
 
                 # TODO: como escrever um link que abra o aplicativo?
                 msg = 'Clique em {LINK} para iniciar o processo de recuperação de senha'.format(LINK=link)
