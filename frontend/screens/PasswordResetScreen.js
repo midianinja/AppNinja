@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
 import theme from '../constants/Theme';
+import Env from '../constants/Environment';
 
 export default class PasswordResetScreen extends React.Component {
   static navigationOptions = {
@@ -56,7 +57,7 @@ export default class PasswordResetScreen extends React.Component {
     let formData = new FormData();
     formData.append("email", this.state.email);
 
-    let response = await fetch(process.env.API_URL + 'api/account/users/send-recover/', {
+    let response = await fetch(Env.apiUrl + 'api/account/users/send-recover/', {
       method: 'POST',
       body: formData,
     });

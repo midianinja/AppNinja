@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
 import theme from '../constants/Theme';
+import Env from '../constants/Environment';
 
 export default class SignUpScreen extends React.Component {
   static navigationOptions = {
@@ -68,7 +69,7 @@ export default class SignUpScreen extends React.Component {
     }
     this.setState({ isLoading: true });
 
-    let response = await fetch(process.env.API_URL + 'api/account/users/', {
+    let response = await fetch(Env.apiUrl + 'api/account/users/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
