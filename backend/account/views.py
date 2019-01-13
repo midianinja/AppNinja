@@ -13,6 +13,7 @@ from .serializers import UserSerializer, HabilidadeSerializer, CausaSerializer, 
         PerfilNinjaSerializer
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
+import os
 
 
 class APIView(BaseAPIView):
@@ -74,9 +75,9 @@ class UserList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def envia_email_confirmacao(self, user):
-
-        link = 'http://127.0.0.1:8000/api/account/users/confirm/{ID}/{TOKEN}'
-        link = link.format(ID=user.id, TOKEN=Token.objects.get_or_create(user=user)[0].pk)
+        host = os.environ['BACKEND_HOST']
+        link = 'http://{HOST}/api/account/users/confirm/{ID}/{TOKEN}'
+        link = link.format(HOST=host, ID=user.id, TOKEN=Token.objects.get_or_create(user=user)[0].pk)
 
         msg = 'Clique em {LINK} para confirmar seu email'.format(LINK=link)
 
@@ -100,9 +101,9 @@ class UserList(APIView):
                 user.recover = True
 
                 user.save()
-
-                link = 'http://127.0.0.1:8000/api/account/users/recover/{ID}/{TOKEN}'
-                link = link.format(ID=user.id, TOKEN=Token.objects.get_or_create(user=user)[0].pk)
+                host = os.environ['BACKEND_HOST']
+                link = 'http://{HOST}/api/account/users/recover/{ID}/{TOKEN}'
+                link = link.format(HOST=host, ID=user.id, TOKEN=Token.objects.get_or_create(user=user)[0].pk)
 
                 # TODO: como escrever um link que abra o aplicativo?
                 msg = 'Clique em {LINK} para iniciar o processo de recuperação de senha'.format(LINK=link)
